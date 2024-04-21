@@ -1,5 +1,4 @@
-﻿# Data Structure 문제 풀이
-
+﻿# Data Structure 중간고사 문제 풀이
 ## 1번
 다음 순환 공식의 시간복잡도를 Big-Oh 표시법으로 구하는 과정을 보이시오
 
@@ -172,6 +171,97 @@ b) 3개
 ![스택중위표기식계산](img/스택중위표기식계산.PNG)
 ### 연산 예제
 ![연산예제](img/예제.PNG)
+
+## 9번
+> 다음은 연결리스트에 노드 삽입/삭제 연산을 구현한 것이다.
+>
+> a) 빈칸(1)과 (2)를 채우시오.
+>
+> b) 각 노드의 data필드 값을 합산하는 함수(int get_sum(ListNode *head))를 작성하시오.
+>```c 
+>#include<stdio.h>
+>#include<stdlib.h>
+>typedef struct ListNode{
+>        int data;
+>        struct ListNode *link; 
+>    }ListNode;
+>
+>// 노드 pre 뒤에 새로운 노드 p 삽입
+>ListNode* insert(ListNode *head, ListNode *pre, int value){
+>    ListNode *p = (ListNode *)malloc(sizeof(ListNode));
+>    p -> data = value;
+>    //a) 코드 작성
+>    return head;
+>}
+>
+>// pre가 가리키는 노드의 다음 노드 removed 삭제
+>ListNode* delete(ListNode *head, ListNode *pre){
+>    ListNode *removed;
+>    // b) 코드 작성
+>    free(removed);
+>    return head;
+>}
+>```
+> |
+
+해설:
+a-1)
+```c
+    if (head == NULL) { // 리스트가 비어있는 경우
+        p->link = NULL;
+        head = p;
+    } else if (pre == NULL) { // 리스트의 시작부에 삽입하는 경우
+        p->link = head;
+        head = p;
+    } else { // 중간이나 끝에 삽입하는 경우
+        p->link = pre->link;
+        pre->link = p;
+    }
+```
+a-2)
+```c
+if (pre == NULL && head != NULL) { // 첫 번째 노드를 삭제하는 경우
+        removed = head;
+        head = head->link;
+    } else if (pre->link != NULL) { // 중간이나 끝의 노드를 삭제하는 경우
+        removed = pre->link;
+        pre->link = removed->link;
+    }
+```
+### 연결 리스트 삽입 연산 코드
+![연결 리스트 삽입 연산 코드](img\연결리스트삽입연산코드.PNG)
+### 연결 리스트 삭제 연산 코드
+![연결 리스트 삭제 연산 코드](img\연결리스트삭제연산코드.PNG)
+
+b)
+```c
+int get_sum(ListNode *head) {
+    int sum = 0; // 합산 값을 저장할 변수
+    ListNode *current = head; // 현재 노드를 가리키는 포인터
+
+    // 리스트를 순회하면서 각 노드의 data 값을 sum에 더함
+    while (current != NULL) {
+        sum += current->data;
+        current = current->link; // 다음 노드로 이동
+    }
+
+    return sum; // 계산된 합산 값 반환
+}
+```
+
+### 연결 리스트 방문 연산 코드
+(위 코드에서는 반복 기법을 사용)
+![연결 리스트 방문 연산 코드](img\연결리스트방문연산코드.PNG)
+
+
+
+
+
+
+
+
+
+
 
 
 
